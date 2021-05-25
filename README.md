@@ -36,7 +36,7 @@ cd talent-board-fe
 npm install
 ```
 
-**5.** Cross check if chnages are not breaking existing codebase
+**5.** Cross check if changes are not breaking existing codebase
 ```bash
 npm start
 ```
