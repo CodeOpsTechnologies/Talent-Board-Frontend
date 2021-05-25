@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+# AWS UI Talent Board
+[![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/CodeOpsTechnologies)
+[![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/CodeOpsTechnologies) [![Made With Love](https://img.shields.io/badge/Made%20With-Love-orange.svg)](https://github.com/CodeOpsTechnologies)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a community initiative to connect active job seekers with organizations and people who participate in employee referral programs.
 
-## Available Scripts
+Currently we encourage only job seekers / candidates who lost their jobs in the pandemic scenario. Referrals should be verified via Linkedin profiles. (Click Linkedin Connect-> Save profile as PDF-> Refer). As a community, it will be a win-win situation for all of us if we can support and make the future safe for one another. Help them to resume their career by referring. #refer2resume
 
-In the project directory, you can run:
+## Prerequisite
+Your Machine must have nodejs installed in your system
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Tech Stack
+<b>Frontned</b>: Reactjs
+<br>
+<b>Styling</b>: CSS and BootStrap v5.0
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting Started
+[![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/CodeOpsTechnologies/talent-board-fe?logo=github)](https://talent.awsug.in/) [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/CodeOpsTechnologies/talent-board-fe?color=bluevoilet&logo=github)](https://github.com/CodeOpsTechnologies/talent-board-fe/commits/) [![GitHub repo size](https://img.shields.io/github/repo-size/CodeOpsTechnologies/talent-board-fe?logo=github)](https://talent.awsug.in/)
 
-### `npm test`
+**1.** Fork [this](https://github.com/CodeOpsTechnologies/talent-board-fe/) repository.
+Click on the <a href="https://github.com/CodeOpsTechnologies/talent-board-fe"><img src="https://img.icons8.com/ios/24/000000/code-fork.png"></a> symbol at the top right corner.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**2.** Clone the forked repository.
+```bash
+git clone https://github.com/<your-github-username>/talent-board-fe
+```
 
-### `npm run build`
+**3.** Navigate to the project directory.
+```bash
+cd talent-board-fe
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**4.** Install all associated node modules
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**5.** Cross check if changes are not breaking existing codebase
+```bash
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**6.** Create a new branch.
+```bash
+git checkout -b <your_branch_name>
+```
 
-### `npm run eject`
+**7.** Make changes in source code.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+**8.** Stage your changes and commit.
+```bash
+#Add changes to Components
+git add .
+#Commit to the local repo
+git commit -m "<your_commit_message>"
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+>CAUTION: Synch up your local repo with [original repo](https://github.com/CodeOpsTechnologies/talent-board-fe) (Upstream) before pushing your commits.
+>This avoids unnecessary conflicts during the merge.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**9.** Push your local commits to the remote repo.
+```bash
+git push -u origin <your_branch_name>
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**10.** Create a [PR](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request)!
 
-## Learn More
+**11.** **Congratulations!** Sit and relax, you've made your contribution to [AWS UG Talent Board](https://talent.awsug.in/) project.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contribution Guidelines
+[![GitHub pull requests](https://img.shields.io/github/issues-pr-raw/CodeOpsTechnologies/talent-board-fe?logo=git&logoColor=white)](https://github.com/CodeOpsTechnologies/talent-board-fe/compare) [![GitHub contributors](https://img.shields.io/github/contributors/CodeOpsTechnologies/talent-board-fe?logo=github)](https://github.com/CodeOpsTechnologies/talent-board-fe/graphs/contributors) [![Vinit Shahdeo](https://img.shields.io/badge/Author-@smilegupta-gray.svg?colorA=gray&colorB=dodgerblue&logo=github)](https://github.com/smilegupta/)
+- Write clear meaningful git commit messages (Do read [this](http://chris.beams.io/posts/git-commit/)).
+- Make sure your PR's description contains GitHub's special keyword references that automatically close the related issue when the PR is merged. (Check [this](https://github.com/blog/1506-closing-issues-via-pull-requests) for more info)
+- When you make very very minor changes to a PR of yours (like for example fixing a text in button, minor changes requested by reviewers) make sure you squash your commits afterward so that you don't have an absurd number of commits for a very small fix. (Learn how to squash at [here](https://davidwalsh.name/squash-commits-git))
+- When you're submitting a PR for a UI-related issue, it would be really awesome if you add a screenshot of your change or a link to a deployment where it can be tested out along with your PR. It makes it very easy for the reviewers and you'll also get reviews quicker.
+- Always create PR to `develop` branch.
+- Please read our [Code of Conduct](./CODE_OF_CONDUCT.md).
+- Refer [this](https://github.com/CodeOpsTechnologies/talent-board-fe/blob/master/CONTRIBUTING.md) for more.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Other Useful Links
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Frontend Code -> [https://github.com/CodeOpsTechnologies/talent-board-fe](https://github.com/CodeOpsTechnologies/talent-board-fe)
+<br>
+Deployed URL -> [https://talent.awsug.in/](https://talent.awsug.in/)
+<br>
+Backend Code -> [https://github.com/CodeOpsTechnologies/talent-board-be](https://github.com/CodeOpsTechnologies/talent-board-be)
+<br>
+API Docs -> [http://reskill-documentaion.s3-website-ap-southeast-1.amazonaws.com/#api-AWS_UG_Talent_Board](http://reskill-documentaion.s3-website-ap-southeast-1.amazonaws.com/#api-AWS_UG_Talent_Board)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+***Glad to see you here! Show some love by [starring](https://github.com/CodeOpsTechnologies/talent-board-fe/) this repo.***
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[![Facebook](https://img.shields.io/static/v1.svg?label=connect&message=@CodeOpsTech&color=grey&logo=facebook&style=flat&logoColor=white&colorA=royalblue)](https://www.facebook.com/CodeOpsTech)
+[![LinkedIn](https://img.shields.io/static/v1.svg?label=connect&message=@CodeOpsTech&color=grey&logo=linkedin&style=flat&logoColor=white&colorA=royalblue)](https://www.linkedin.com/company/codeops-technologies/)
+[![Twitter](https://img.shields.io/static/v1.svg?label=connect&message=@CodeOpsTech&color=grey&logo=twitter&style=flat&logoColor=white&colorA=royalblue)](https://twitter.com/CodeOpsTech)
