@@ -1,0 +1,13 @@
+name: awsug-talent-board
+
+awsug-talent:
+  component: "@serverless/website"
+  region: ap-southeast-1
+  inputs:
+    code:
+      src: ./build
+    bucketName: dev-talent-board
+    domain: dev-talent-board.awsreskill.com
+    env:
+      REACT_APP_API_URL: ${env.REACT_APP_API_URL}
+

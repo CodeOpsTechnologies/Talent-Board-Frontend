@@ -1,0 +1,380 @@
+@import url(//db.onlinewebfonts.com/c/157c6cc36dd65b1b2adc9e7f3329c761?family=Amazon+Ember);
+
+/************ FONT IMPORT ****************/
+@font-face {
+  font-family: "Amazon Ember";
+  src: url("//db.onlinewebfonts.com/t/157c6cc36dd65b1b2adc9e7f3329c761.eot");
+  src: url("//db.onlinewebfonts.com/t/157c6cc36dd65b1b2adc9e7f3329c761.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/157c6cc36dd65b1b2adc9e7f3329c761.woff2")
+      format("woff2"),
+    url("//db.onlinewebfonts.com/t/157c6cc36dd65b1b2adc9e7f3329c761.woff")
+      format("woff"),
+    url("//db.onlinewebfonts.com/t/157c6cc36dd65b1b2adc9e7f3329c761.ttf")
+      format("truetype"),
+    url("//db.onlinewebfonts.com/t/157c6cc36dd65b1b2adc9e7f3329c761.svg#Amazon Ember")
+      format("svg");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Amazon Ember";
+  src: url("//db.onlinewebfonts.com/t/02fcddff61b677f4989d2933d574ca89.eot");
+  src: url("//db.onlinewebfonts.com/t/02fcddff61b677f4989d2933d574ca89.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/02fcddff61b677f4989d2933d574ca89.woff2")
+      format("woff2"),
+    url("//db.onlinewebfonts.com/t/02fcddff61b677f4989d2933d574ca89.woff")
+      format("woff"),
+    url("//db.onlinewebfonts.com/t/02fcddff61b677f4989d2933d574ca89.ttf")
+      format("truetype"),
+    url("//db.onlinewebfonts.com/t/02fcddff61b677f4989d2933d574ca89.svg#Amazon Ember")
+      format("svg");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/************ Common ****************/
+
+:root {
+  --background-color: #252f3e;
+  --primary-color: #ec7211;
+  --black: #333333;
+  --white: #ffffff;
+  --grey: #f2f2f2;
+}
+
+/************ DOCUMENT STYLES ****************/
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Amazon Ember", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  font-style: normal;
+  letter-spacing: 1px;
+  overflow-x: hidden;
+}
+
+body {
+  height: 100%;
+  font-family: "Amazon Ember", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  background: url("../Images/bg_h.svg") left top no-repeat;
+  background-color: var(--background-color);
+  color: var(--white);
+}
+
+.font-10 {
+  font-size: 10px;
+}
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+/************ REACT SELECT BOX ****************/
+.react-select-padding__value-container {
+  padding: 2px 10px !important;
+}
+
+.react-select-padding__control {
+  background: #ffffff !important;
+  border: 1px solid #b5d6ff;
+}
+
+.react-select-padding__control:focus, .react-select-padding__control--is-focused {
+  border-color: #ec7211 !important;
+  box-shadow: 0 0 0 0.2rem rgba(236, 114, 17, 0.25) !important;
+}
+
+.font-12 {
+  font-size: 12px;
+}
+
+.font-14 {
+  font-size: 14px;
+}
+
+.font-16 {
+  font-size: 16px;
+}
+
+.font-18 {
+  font-size: 18px;
+}
+
+.font-24 {
+  font-size: 24px;
+}
+.border-20 {
+  border-radius: 20px;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/************ Homepage ****************/
+
+.submitdetails {
+  min-height: 100vh;
+  background: url("../Images/tada.svg") bottom no-repeat;
+}
+
+.submission_content {
+  color: var(--black);
+}
+
+.button-timeline {
+  background-color: var(--grey);
+  color: var(--black);
+}
+
+.bottom-timeline-selected {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: var(--primary-color) !important;
+}
+
+.text {
+  font-size: 11px;
+  padding-top: 2px;
+}
+
+.arrow {
+  text-decoration: none;
+  color: var(--white);
+}
+
+.arrow:active {
+  text-decoration: none;
+}
+
+.searchComponent {
+  border: 1px solid #b5d6ff;
+  background: #fafbfd;
+  border-radius: 7px !important;
+  padding: 5px;
+}
+
+.seachbutton {
+  display: none;
+}
+
+.blogSearch {
+  border: none;
+  margin-left: 10px;
+  width: 95%;
+  background-color: transparent;
+}
+
+.blogSearch:focus-visible {
+  outline: none;
+}
+
+input.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+  border-color: #ec7211 !important;
+  box-shadow: 0 0 0 0.2rem rgba(236, 114, 17, 0.25) !important;
+}
+
+.form-check-input:checked {
+  background-color: #ec7211;
+  border-color: #ec7211;
+}
+
+.btn-check:checked {
+  color: var(--white);
+}
+
+.rdt_TableHeadRow {
+  background-color: #f2f2f2 !important;
+}
+
+.rdt_TableHeader {
+  display: none !important;
+}
+
+.rdt_TableCol,
+.rdt_TableRow {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+}
+
+.pill {
+  background-color: #fdf2ea !important;
+  color: var(--primary-color) !important;
+}
+
+.grey-pill {
+  background-color: #eeeeee !important;
+  color: var(--black) !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .blogSearch {
+    border: none;
+    margin-left: 10px;
+    width: 89%;
+    background-color: transparent;
+  }
+}
+
+.btn-group > .btn-check:checked + .btn,
+.btn-group > .btn-check:focus + .btn,
+.btn-group > .btn:hover,
+.btn-group > .btn:focus,
+.btn-group > .btn:active,
+.btn-group > .btn.active,
+.btn-group-vertical > .btn-check:checked + .btn,
+.btn-group-vertical > .btn-check:focus + .btn,
+.btn-group-vertical > .btn:hover,
+.btn-group-vertical > .btn:focus,
+.btn-group-vertical > .btn:active,
+.btn-group-vertical > .btn.active {
+  color: var(--white);
+  background-color: var(--primary-color);
+  z-index: 0;
+  box-shadow: none;
+}
+
+.autoDeleteProfile {
+  background-color: #f2f2f2;
+  color: var(--black);
+  border-color: #f2f2f2;
+}
+
+
+/************ TIPPY CUSTOM STYLES ****************/
+.custom-tippy {
+  background-color: #2B394A !important;
+  border-radius: 10px !important;
+  padding: 2px !important;
+}
+.tippy-box[data-placement^="top"] > .tippy-arrow:before {
+  border-top-color:#2B394A !important; /* set your color here and use the !important property */
+}
+
+.tippy-box[data-placement^="bottom"] > .tippy-arrow:before {
+  border-bottom-color:#2B394A !important; /* set your color here and use the !important property */
+}
+
+.tippy-box[data-placement^="right"] > .tippy-arrow:before {
+  border-right-color:#2B394A !important; /* set your color here and use the !important property */
+}
+
+.tippy-box[data-placement^="left"] > .tippy-arrow:before {
+  border-left-color:#2B394A !important; /* set your color here and use the !important property */
+}
+
+
+.text-danger{
+  color: red;
+}
+
+.text-captialise{
+  text-transform: capitalize;
+}
+
+/************ MODAL WINDOW STYLES ****************/
+.ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.75) !important;
+  backdrop-filter: blur(5px);
+}
+
+.ReactModal__Overlay--after-open {
+  z-index: 100 !important;
+}
+
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}
+
+.react-modal-side {
+  top: 0;
+  left: 65%;
+  width: 35%;
+  height: 100%;
+  background: #232f3e;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.25);
+  border-radius: 0px;
+  position: relative;
+  color: #fff;
+  padding: 10px;
+  overflow: auto;
+}
+
+.react-modal {
+  width: 40%;
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #232f3e;
+  box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  position: relative;
+  color: #fff;
+  padding: 10px;
+  overflow: auto;
+  max-height: calc(100% - 75px);
+}
+
+
+
+/* XS screens */
+@media only screen and (max-width: 480px) {
+  .react-modal {
+      width: 80% !important;
+  }
+  .react-modal-side{
+      width: 65% !important;
+      left: 35% !important;
+  }
+}
+
+/* SM screens */
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+  .react-modal {
+      width: 80% !important;
+  }
+  .react-modal-side{
+      width: 65% !important;
+      left: 35% !important;
+  }
+}
+
+.react-modal:focus,
+.react-modal-side:focus {
+  border: none;
+  outline: none;
+}
+
+.react-modal,
+  .react-modal-title-container,
+  .react-modal-side,
+  .react-modal-side-title-container {
+  padding: 20px;
+}
+
+.react-modal .react-modal-title .react-modal-side .react-modal-side-title {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.react-modal .react-modal-close .react-modal-side .react-modal-side-close {
+  font-size: 24px;
+  font-weight: bold;
+}
+
