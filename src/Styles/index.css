@@ -71,25 +71,6 @@ body {
   font-size: 10px;
 }
 
-.cursor-pointer{
-  cursor: pointer;
-}
-
-/************ REACT SELECT BOX ****************/
-.react-select-padding__value-container {
-  padding: 2px 10px !important;
-}
-
-.react-select-padding__control {
-  background: #ffffff !important;
-  border: 1px solid #b5d6ff;
-}
-
-.react-select-padding__control:focus, .react-select-padding__control--is-focused {
-  border-color: #ec7211 !important;
-  box-shadow: 0 0 0 0.2rem rgba(236, 114, 17, 0.25) !important;
-}
-
 .font-12 {
   font-size: 12px;
 }
@@ -113,12 +94,40 @@ body {
   border-radius: 20px;
 }
 
+.cursor-pointer{
+  cursor: pointer;
+}
+
 a {
   text-decoration: none !important;
 }
 
 a:hover {
   text-decoration: none;
+}
+
+
+.text-danger{
+  color: red;
+}
+
+.text-captialise{
+  text-transform: capitalize;
+}
+
+/************ REACT SELECT BOX ****************/
+.react-select-padding__value-container {
+  padding: 2px 10px !important;
+}
+
+.react-select-padding__control {
+  background: #ffffff !important;
+  border: 1px solid #b5d6ff;
+}
+
+.react-select-padding__control:focus, .react-select-padding__control--is-focused {
+  border-color: #ec7211 !important;
+  box-shadow: 0 0 0 0.2rem rgba(236, 114, 17, 0.25) !important;
 }
 
 /************ Homepage ****************/
@@ -171,14 +180,14 @@ a:hover {
   display: none;
 }
 
-.blogSearch {
+.searchBox {
   border: none;
   margin-left: 10px;
   width: 95%;
   background-color: transparent;
 }
 
-.blogSearch:focus-visible {
+.searchBox:focus-visible {
   outline: none;
 }
 
@@ -223,7 +232,7 @@ input.form-control:focus,
 }
 
 @media only screen and (max-width: 600px) {
-  .blogSearch {
+  .searchBox {
     border: none;
     margin-left: 10px;
     width: 89%;
@@ -276,15 +285,6 @@ input.form-control:focus,
 
 .tippy-box[data-placement^="left"] > .tippy-arrow:before {
   border-left-color:#2B394A !important; /* set your color here and use the !important property */
-}
-
-
-.text-danger{
-  color: red;
-}
-
-.text-captialise{
-  text-transform: capitalize;
 }
 
 /************ MODAL WINDOW STYLES ****************/

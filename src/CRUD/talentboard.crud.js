@@ -6,6 +6,7 @@ const ADD_PROFILE = "/awsug/talent";
 const GET_DATA = "/awsug/talent/profiles";
 const FILTER_DATA = "/awsug/talent/filters"
 
+// API to Create Profile
 export function createProfile(
   name,
   skills,
@@ -37,6 +38,7 @@ export function createProfile(
   return axios.post(API_URL + ADD_PROFILE, payload);
 }
 
+// API to Fetch all profiles
 export function getPofiles(limit, offset, searchTerm="", sort = "+name", finalArrayValue = {} ) {
   const payload = {
     limit: limit,
@@ -49,7 +51,7 @@ export function getPofiles(limit, offset, searchTerm="", sort = "+name", finalAr
   return axios.post(API_URL + GET_DATA, payload);
 }
 
-
+// API to get filters
 export function getFitlers(){
   return axios.get(API_URL + FILTER_DATA )
 }

@@ -1,32 +1,35 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect, useRef } from "react";
-import Chevron from "./Chevron";
+import { useState, useEffect, useRef } from "react";
 import { Formik, FieldArray } from "formik";
+import { experienceFilter } from "../../Pages/constants";
+import Chevron from "./Chevron";
 import "./Accordin.css";
 
 function Accordion({
-  title,
+  displayHeading,
+  mappingName,
   filtersArray,
   finalArray,
   setFinalArray,
   filterData,
-  smileHelper,
-  setSmileHelper,
+  filterHelper,
+  setfilterHelper,
 }) {
+  // State Variables
   const [setActive, setActiveState] = useState("");
   const [setHeight, setHeightState] = useState("0px");
   const [setRotate, setRotateState] = useState("accordion__icon");
   let initalArray = [];
-
-  useEffect(() => {
-    if (smileHelper) {
-      helloWorld();
-    }
-  }, [smileHelper]);
-
   const content = useRef(null);
 
-  function toggleAccordion() {
+  useEffect(() => {
+    if (filterHelper) {
+      clearingFilters();
+    }
+  }, [filterHelper]);
+
+  // Helper Function for Accordian
+  const toggleAccordion = () => {
     setActiveState(setActive === "" ? "active" : "");
     setHeightState(
       setActive === "active" ? "0px" : `${content.current.scrollHeight}px`
@@ -34,25 +37,18 @@ function Accordion({
     setRotateState(
       setActive === "active" ? "accordion__icon" : "accordion__icon rotate"
     );
-  }
+  };
 
-  const helloWorld = () => {
-    document.getElementById(title).reset();
-    setSmileHelper(false);
+  // Function to clear all filters
+  const clearingFilters = () => {
+    document.getElementById(mappingName).reset();
+    setfilterHelper(false);
   };
 
   return (
     <div className="accordion__section">
       <button className={`accordion ${setActive}`} onClick={toggleAccordion}>
-        <span className="accordion__title">
-          {title === "industry"
-            ? "Industries"
-            : title === "city"
-            ? "Cities"
-            : title === "skills"
-            ? "Skills"
-            : "Job Roles"}
-        </span>
+        <span className="accordion__title">{displayHeading}</span>
         <Chevron className={`${setRotate}`} width={10} fill={"#777"} />
       </button>
       <div
@@ -66,7 +62,7 @@ function Accordion({
             <FieldArray
               name="finalArray"
               render={(arrayHelpers) => (
-                <form id={title}>
+                <form id={mappingName}>
                   <div className="skills_list px-2">
                     {filtersArray &&
                       filtersArray.map((filters, idx) => (
@@ -78,19 +74,38 @@ function Accordion({
                             style={{ marginTop: "7px" }}
                             onChange={(e) => {
                               if (e.target.checked) {
-                                arrayHelpers.push(filters);
-                                finalArray[title].push(filters);
-                                const temp = finalArray;
-                                setFinalArray(temp);
+                                // Mapping for just Experience filter
+                                if (experienceFilter.includes(filters)) {
+                                  arrayHelpers.push(
+                                    experienceFilter.indexOf(filters) + 1
+                                  );
+                                  finalArray[mappingName].push(
+                                    experienceFilter.indexOf(filters) + 1
+                                  );
+                                } else {
+                                  arrayHelpers.push(filters);
+                                  finalArray[mappingName].push(filters);
+                                }
+                                setFinalArray(finalArray);
                                 filterData(finalArray);
                               } else {
-                                const rashmi =
+                                console.log(finalArray);
+                                const filter =
                                   values.initalArray.indexOf(filters);
-                                arrayHelpers.remove(rashmi);
-                                const finalIdx =
-                                  finalArray[title].indexOf(filters);
+                                arrayHelpers.remove(filter);
+
+                                let finalIdx;
+                                // Mapping for just Experience filter
+                                if (experienceFilter.includes(filters)) {
+                                  finalIdx = finalArray[mappingName].indexOf(
+                                    experienceFilter.indexOf(filters) + 1
+                                  );
+                                } else {
+                                  finalIdx =
+                                    finalArray[mappingName].indexOf(filters);
+                                }
                                 if (finalIdx > -1) {
-                                  finalArray[title].splice(finalIdx, 1);
+                                  finalArray[mappingName].splice(finalIdx, 1);
                                 }
                                 setFinalArray(finalArray);
                                 filterData(finalArray);
@@ -111,8 +126,8 @@ function Accordion({
                     <div
                       className="px-2 py-1 clear_all_div"
                       onClick={() => {
-                        finalArray[title] = [];
-                        document.getElementById(title).reset();
+                        finalArray[mappingName] = [];
+                        document.getElementById(mappingName).reset();
                         filterData(finalArray);
                       }}
                     >

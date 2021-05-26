@@ -1,14 +1,14 @@
 import Modal from "react-modal";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
 
 const Submission = ({ modalStatus, setModalStatus }) => {
-  const history = useHistory()
+  const history = useHistory();
 
   const closeModalFunction = (e) => {
     e.preventDefault();
-    history.push('/')
-    setModalStatus(false)
-  }
+    history.push("/");
+    setModalStatus(false);
+  };
 
   return (
     <Modal
