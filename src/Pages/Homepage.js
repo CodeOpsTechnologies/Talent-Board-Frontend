@@ -1,15 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import AWSUG from "../Images/communityLogo.png";
+import icon from "../Images/icon.svg";
 import DataTable from "react-data-table-component";
-import { getPofiles, getFitlers } from "../CRUD/talentboard.crud";
-import icon from "../icon.svg";
 import Accordion from "../Components/Accordian/Accordian";
+import Loader from "../Components/Loader";
+import { experienceFilter } from "./constants";
+import { getPofiles, getFitlers } from "../CRUD/talentboard.crud";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 
 const Homepage = () => {
+  const defaultFilterMapping = {
+    city: [],
+    industry: [],
+    skills: [],
+    jobroles: [],
+    experience: [],
+  };
+  // State Variables
   const [limit, setlimit] = useState(30);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
@@ -17,28 +27,60 @@ const Homepage = () => {
   const [data, setData] = useState();
   const [totalPages, setTotalPages] = useState();
   const [filtersArray, setFilters] = useState();
-  const [smileHelper, setSmileHelper] = useState(false);
-  let [finalArray, setFinalArray] = useState({
-    city: [],
-    industry: [],
-    skills: [],
-    jobroles: []
-  });
+  const [filterHelper, setfilterHelper] = useState(false);
+  let [finalArray, setFinalArray] = useState(defaultFilterMapping);
+  const [loading, setLoading] = useState(true);
 
-  const clearAll = async () => {
-    setFinalArray({
-    city: [],
-    industry: [],
-    skills: [],
-    jobroles: []
-    })
-    setSmileHelper(true)
+  useEffect(() => {
+    getData(limit, 0, searchTerm, sort);
+    getFilterData();
+  }, []);
+
+  // Getting Profiles
+  const getData = async (limits, offsets, searchTerms, sortTerm) => {
+    const res = await getPofiles(limits, offsets, searchTerms, sortTerm);
+    setData(res.data.profiles);
+    setTotalPages(res.data.count);
+    setLoading(false);
+  };
+
+  // Fetching Filters
+  const getFilterData = async () => {
+    const res = await getFitlers();
+    setFilters(res.data);
+  };
+
+  // Searching in Datatable
+  const searchTermFun = async (e) => {
+    e.preventDefault();
     const res = await getPofiles(limit, 0, searchTerm, sort);
     setCurrentPage(1);
     setData(res.data.profiles);
     setTotalPages(res.data.count);
-  }
+  };
 
+  // Data Table Related Functions
+  const handlePageChange = (page) => {
+    getData(limit, (page - 1) * limit, searchTerm, sort);
+    setCurrentPage(page);
+  };
+
+  const handlePerRowsChange = async (newPerPage, page) => {
+    getData(newPerPage, (page - 1) * limit, searchTerm, sort);
+    setlimit(newPerPage);
+  };
+
+  // Clearing all filters
+  const clearAll = async () => {
+    setFinalArray(defaultFilterMapping);
+    setfilterHelper(true);
+    const res = await getPofiles(limit, 0, searchTerm, sort);
+    setCurrentPage(1);
+    setData(res.data.profiles);
+    setTotalPages(res.data.count);
+  };
+
+  // Fetching Data After Adding Filters
   const filterData = async (finalArrayValue) => {
     const res = await getPofiles(limit, 0, searchTerm, sort, finalArrayValue);
     setCurrentPage(1);
@@ -46,6 +88,7 @@ const Homepage = () => {
     setTotalPages(res.data.count);
   };
 
+  // Sorting Data Table Fields
   const sortingFunction = async (e, sortValue) => {
     e.preventDefault();
     const res = await getPofiles(limit, 0, searchTerm, sortValue);
@@ -55,6 +98,7 @@ const Homepage = () => {
     setTotalPages(res.data.count);
   };
 
+  // Data Table
   const columns = [
     {
       minWidth: "15%",
@@ -242,40 +286,6 @@ const Homepage = () => {
     },
   ];
 
-  useEffect(() => {
-    getData(limit, 0, searchTerm, sort);
-    getFilterData();
-  }, []);
-
-  const getData = async (limits, offsets, searchTerms, sortTerm) => {
-    const res = await getPofiles(limits, offsets, searchTerms, sortTerm);
-    setData(res.data.profiles);
-    setTotalPages(res.data.count);
-  };
-
-  const getFilterData = async () => {
-    const res = await getFitlers();
-    setFilters(res.data);
-  };
-
-  const searchTermFun = async (e) => {
-    e.preventDefault();
-    const res = await getPofiles(limit, 0, searchTerm, sort);
-    setCurrentPage(1);
-    setData(res.data.profiles);
-    setTotalPages(res.data.count);
-  };
-
-  const handlePageChange = (page) => {
-    getData(limit, (page - 1) * limit, searchTerm, sort);
-    setCurrentPage(page);
-  };
-
-  const handlePerRowsChange = async (newPerPage, page) => {
-    getData(newPerPage, (page - 1) * limit, searchTerm, sort);
-    setlimit(newPerPage);
-  };
-
   return (
     <div className="px-md-5 px-3 py-3">
       <nav className="px-3 navbar navbar-expand-lg no-gutters justify-content-between">
@@ -285,7 +295,10 @@ const Homepage = () => {
         </span>
 
         <Link to="/add-profile">
-          <button className="btn btn-primary my-2 my-sm-0 font-14 text-white btn-lg" style={{fontWeight: "600"}}>
+          <button
+            className="btn btn-primary my-2 my-sm-0 font-14 text-white btn-lg"
+            style={{ fontWeight: "600" }}
+          >
             Add Your Profile
           </button>
         </Link>
@@ -308,105 +321,119 @@ const Homepage = () => {
       </div>
 
       <div className="row px-3 mt-4">
-        <div className="col-lg-10 col-xs-12 font-16 mt-5">
-          <div className="searchComponent mb-4">
-            <form onSubmit={(e) => searchTermFun(e)}>
-              <span>
-                <i
-                  className="las la-search cursor-pointer la-flip-horizontal"
-                  style={{ color: "#333333" }}
-                />
-              </span>
-              <input
-                type="search"
-                value={searchTerm}
-                className="blogSearch"
-                onChange={(e) => setSearchTerm(e.target.value)}
+        {loading ? (
+          <div className="mt-5">
+            {" "}
+            <Loader />{" "}
+          </div>
+        ) : (
+          <Fragment>
+            {/* Data Table Section */}
+            <div className="col-lg-10 col-xs-12 font-16 mt-5">
+              <div className="searchComponent mb-4">
+                <form onSubmit={(e) => searchTermFun(e)}>
+                  <span>
+                    <i
+                      className="las la-search cursor-pointer la-flip-horizontal"
+                      style={{ color: "#333333" }}
+                    />
+                  </span>
+                  <input
+                    type="search"
+                    value={searchTerm}
+                    className="searchBox"
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                  />
+                  <button className="seachbutton" type="submit">
+                    {" "}
+                    Enter{" "}
+                  </button>
+                </form>
+              </div>
+              <h5 className="mb-3">Job Seekers</h5>
+              <DataTable
+                responsive
+                title=""
+                columns={columns}
+                data={data}
+                sortIcon={
+                  <img src={icon} style={{ padding: "5px" }} alt="text" />
+                }
+                pagination
+                paginationServer
+                paginationTotalRows={totalPages}
+                paginationDefaultPage={currentPage}
+                onChangeRowsPerPage={handlePerRowsChange}
+                onChangePage={handlePageChange}
+                paginationPerPage={30}
+                paginationRowsPerPageOptions={[30, 50, 100, 200]}
               />
-              <button className="seachbutton" type="submit">
-                {" "}
-                Enter{" "}
-              </button>
-            </form>
-          </div>
-          <h5 className="mb-3">
-            Job Seekers
-          </h5>
-          <DataTable
-            responsive
-            title=""
-            columns={columns}
-            data={data}
-            sortIcon={<img src={icon} style={{ padding: "5px" }} alt="text" />}
-            pagination
-            paginationServer
-            paginationTotalRows={totalPages}
-            paginationDefaultPage={currentPage}
-            onChangeRowsPerPage={handlePerRowsChange}
-            onChangePage={handlePageChange}
-            paginationPerPage={30}
-            paginationRowsPerPageOptions={[30, 50, 100, 200]}
-          />
-        </div>
-        <div className="col-lg-2 col-xs-12 font-16 mt-3">
-          <div className="row mb-2">
-            <div className="col-6">Filter By:</div>
-            <div className="col-6 text-primary text-end cursor-pointer" onClick={() => clearAll()}>Clear All</div>
-          </div>
-
-          {filtersArray && filtersArray.industries && (
-            <Accordion
-              title="industry"
-              filtersArray={filtersArray.industries}
-              finalArray={finalArray}
-              setFinalArray={setFinalArray}
-              filterData={filterData}
-              smileHelper={smileHelper}
-              setSmileHelper={setSmileHelper}
-            />
-          )}
-          <br />
-          {filtersArray && filtersArray.cities && (
-            <Accordion
-              title="city"
-              filtersArray={filtersArray.cities}
-              finalArray={finalArray}
-              setFinalArray={setFinalArray}
-              filterData={filterData}
-              smileHelper={smileHelper}
-              setSmileHelper={setSmileHelper}
-            />
-          )}
-
-          <br />
-
-          {filtersArray && filtersArray.skills && (
-            <Accordion
-              title="skills"
-              filtersArray={filtersArray.skills}
-              finalArray={finalArray}
-              setFinalArray={setFinalArray}
-              filterData={filterData}
-              smileHelper={smileHelper}
-              setSmileHelper={setSmileHelper}
-            />
-          )}
-
-          <br />
-          {/* {filtersArray && filtersArray.jobroles && (
-            <Accordion
-              title="jobroles"
-              filtersArray={filtersArray.jobroles}
-              finalArray={finalArray}
-              setFinalArray={setFinalArray}
-              filterData={filterData}
-              smileHelper={smileHelper}
-              setSmileHelper={setSmileHelper}
-            />
-          )} */}
-
-
-        </div>
+            </div>
+            {/* Filter Section */}
+            <div className="col-lg-2 col-xs-12 font-16 mt-3">
+              <div className="row mb-2">
+                <div className="col-6">Filter By:</div>
+                <div
+                  className="col-6 text-primary text-end cursor-pointer"
+                  onClick={() => clearAll()}
+                >
+                  Clear All
+                </div>
+              </div>
+              {filtersArray && filtersArray.industries && (
+                <Accordion
+                  displayHeading="Industries"
+                  mappingName="industry"
+                  filtersArray={filtersArray.industries}
+                  finalArray={finalArray}
+                  setFinalArray={setFinalArray}
+                  filterData={filterData}
+                  filterHelper={filterHelper}
+                  setfilterHelper={setfilterHelper}
+                />
+              )}
+              <br />
+              {filtersArray && filtersArray.cities && (
+                <Accordion
+                  displayHeading="Cities"
+                  mappingName="city"
+                  filtersArray={filtersArray.cities}
+                  finalArray={finalArray}
+                  setFinalArray={setFinalArray}
+                  filterData={filterData}
+                  filterHelper={filterHelper}
+                  setfilterHelper={setfilterHelper}
+                />
+              )}
+              <br />
+              {filtersArray && filtersArray.skills && (
+                <Accordion
+                  displayHeading="Skills"
+                  mappingName="skills"
+                  filtersArray={filtersArray.skills}
+                  finalArray={finalArray}
+                  setFinalArray={setFinalArray}
+                  filterData={filterData}
+                  filterHelper={filterHelper}
+                  setfilterHelper={setfilterHelper}
+                />
+              )}
+              <br />
+              {filtersArray && (
+                <Accordion
+                  displayHeading="Experience"
+                  mappingName="experience"
+                  filtersArray={experienceFilter}
+                  finalArray={finalArray}
+                  setFinalArray={setFinalArray}
+                  filterData={filterData}
+                  filterHelper={filterHelper}
+                  setfilterHelper={setfilterHelper}
+                />
+              )}
+            </div>
+          </Fragment>
+        )}
       </div>
     </div>
   );

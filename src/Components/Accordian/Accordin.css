@@ -4,11 +4,20 @@
   flex-direction: column;
 }
 
+/* Style the skill list section */
 .skills_list{
   max-height: 250px;
   overflow: scroll;
 }
 
+/* Style the individual clear all */
+.clear_all_div{
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+/* Style the clear all text */
 .clear_all{
   font-weight: 600;
   font-size: 12px;
@@ -21,13 +30,6 @@
   border: none;
   outline: none;
 }
-
-.clear_all_div{
-  display: block;
-  width: 100%;
-  text-align: center;
-}
-
 
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {

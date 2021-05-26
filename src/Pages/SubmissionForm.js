@@ -1,53 +1,27 @@
 /* eslint-disable no-unused-vars */
+import { useState, useEffect } from "react";
+import { getStates, getCities } from "../CRUD/locations.crud";
+import { createProfile } from "../CRUD/talentboard.crud";
 import Reaptcha from "reaptcha";
 import { Link } from "react-router-dom";
+import Select from "react-select";
+import CreatableSelect from "react-select/creatable";
 import {
   skills,
   industeries,
   experienceList,
   proficienyLevelList,
-  array2
-} from "./helpers";
+} from "./constants";
 import _ from "lodash";
-import { useState, useEffect } from "react";
-import { getStates, getCities } from "../CRUD/locations.crud";
-import Select from "react-select";
-import CreatableSelect from "react-select/creatable";
-import { createProfile } from "../CRUD/talentboard.crud";
+import SuccessModal from "./SuccessModal";
+import moment from "moment";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import { toast } from "react-toastify";
-import SuccessModal from "./SuccessModal";
-import moment from "moment";
 toast.configure();
 
 const SubmissionForm = () => {
-  useEffect(() => {
-    getStatesList();
-  }, []);
-
-  const customStyles = {
-    dropdownIndicator: (base, state) => ({
-      ...base,
-      color: "black",
-      transition: "all .2s ease",
-      transform: state.isFocused ? "rotate(180deg)" : null,
-      borderLeft: "none"
-    })
-  };
-
-  const getStatesList = async () => {
-    const res = await getStates();
-    let temp = [];
-    for (let i = 0; i < res.data.length; i++) {
-      temp.push({
-        value: res.data[i].state_name,
-        label: res.data[i].state_name
-      });
-    }
-    setStates(temp);
-  };
-
+  // State Variables
   const [name, setName] = useState("");
   const [industry, setIndustry] = useState("");
   const [jobRole, setJobRole] = useState("");
@@ -65,18 +39,6 @@ const SubmissionForm = () => {
   const [onVerify, setOnVerify] = useState(false);
   const [loading, setLoading] = useState(false);
   const [modalStatus, setModalStatus] = useState(false);
-
-  const getCitiesList = async value => {
-    const res = await getCities(value);
-    let temp = [];
-    for (let i = 0; i < res.data.length; i++) {
-      temp.push({
-        value: res.data[i].city_name,
-        label: res.data[i].city_name
-      });
-    }
-    setCities(temp);
-  };
   let [errors, setErrors] = useState({});
   let [visited, setVisited] = useState({
     name: false,
@@ -87,8 +49,111 @@ const SubmissionForm = () => {
     proficienyLevel: false,
     experience: false,
     cityValue: false,
-    stateValue: false
+    stateValue: false,
   });
+
+  // Getting Initial States List
+  useEffect(() => {
+    getStatesList();
+  }, []);
+
+  // Style for Dropdown
+  const customStyles = {
+    dropdownIndicator: (base, state) => ({
+      ...base,
+      color: "black",
+      transition: "all .2s ease",
+      transform: state.isFocused ? "rotate(180deg)" : null,
+      borderLeft: "none",
+    }),
+  };
+
+  // Helper Functions
+
+  // Handle Visited Fields
+  const handleVisited = (e) => {
+    let { name } = e.target || e;
+    _.set(visited, name, true);
+    setVisited({ ...visited });
+    doValidate();
+  };
+
+  // Handling Skills
+  const handleChange = (newValue) => {
+    setSkills(newValue);
+  };
+
+  // Validations
+  // Initial Validation
+  const doValidate = () => {
+    errors = {};
+
+    if ((name.trim() === undefined || name.trim() === "") && visited.name)
+      errors.name = "Please enter your name";
+
+    if (
+      (industry.value === undefined || industry.value === "") &&
+      visited.industry
+    )
+      errors.industry = "Please enter the industry name";
+
+    if (!skillsList.length > 0 && visited.skillsList)
+      errors.skills = "Please enter your skills";
+
+    if (
+      (jobRole.trim() === undefined || jobRole.trim() === "") &&
+      visited.jobRole
+    )
+      errors.jobRole = "Please enter your job role";
+
+    if (
+      (proficienyLevel.value === undefined || proficienyLevel.value === "") &&
+      visited.proficienyLevel
+    )
+      errors.proficienyLevel = "Please mention your AWS proficiency level";
+
+    if (
+      (experience.value === undefined || experience.value === "") &&
+      visited.experience
+    )
+      errors.experience = "Please enter your experience";
+
+    if (
+      (linkedinUrl.trim() === undefined || linkedinUrl.trim() === "") &&
+      visited.linkedinUrl
+    )
+      errors.linkedinUrl = "Please enter your LinkedIn URL";
+
+    if (
+      linkedinUrl !== "" &&
+      linkedinUrl !== null &&
+      linkedinUrl !== undefined &&
+      visited.linkedinUrl
+    ) {
+      if (!/^https:\/\/[a-z]{2,3}\.linkedin\.com\/.*$/.test(linkedinUrl))
+        errors.linkedinUrl = "Please enter a valid LinkedIn URL.";
+    }
+
+    if (
+      (stateValue.value === undefined || stateValue.value === "") &&
+      visited.stateValue
+    )
+      errors.stateValue = "Please enter your state";
+
+    if (
+      (cityValue.value === undefined || cityValue.value === "") &&
+      visited.cityValue
+    )
+      errors.cityValue = "Please enter your city";
+
+    setErrors(errors);
+
+    if (Object.entries(errors).length === 0) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   // Final Validation
   const finalValidate = () => {
@@ -141,84 +206,35 @@ const SubmissionForm = () => {
     }
   };
 
-  // Initial Validation
-  const doValidate = () => {
-    errors = {};
-
-    if ((name.trim() === undefined || name.trim() === "") && visited.name)
-      errors.name = "Please enter your name";
-
-    if (
-      (industry.value === undefined || industry.value === "") &&
-      visited.industry
-    )
-      errors.industry = "Please enter the industry name";
-
-    if (!skillsList.length > 0 && visited.skillsList)
-      errors.skills = "Please enter your skills";
-
-    if (
-      (jobRole.trim() === undefined || jobRole.trim() === "") &&
-      visited.jobRole
-    )
-      errors.jobRole = "Please enter your job role";
-
-    if (
-      (proficienyLevel.value === undefined || proficienyLevel.value === "") &&
-      visited.proficienyLevel
-    )
-      errors.proficienyLevel = "Please mention your AWS proficiency level";
-
-    if (
-      (experience.value === undefined || experience.value === "") &&
-      visited.experience
-    )
-      errors.experience = "Please enter your experience";
-
-    if (
-      (linkedinUrl.trim() === undefined || linkedinUrl.trim() === "") &&
-      visited.linkedinUrl
-    )
-      errors.linkedinUrl = "Please enter your LinkedIn URL";
-
-    if (
-      linkedinUrl !== "" &&
-      linkedinUrl !== null &&
-      linkedinUrl !== undefined &&
-      visited.linkedinUrl
-    ) {
-      if (!/^https:\/\/[a-z]{2,3}\.linkedin\.com\/.*$/.test(linkedinUrl))
-        errors.linkedinUrl = "Please enter a valid LinkedIn URL.";
+  // API Calls
+  // API to get State list
+  const getStatesList = async () => {
+    const res = await getStates();
+    let temp = [];
+    for (let i = 0; i < res.data.length; i++) {
+      temp.push({
+        value: res.data[i].state_name,
+        label: res.data[i].state_name,
+      });
     }
+    setStates(temp);
+  };
 
-    if ((stateValue.value === undefined || stateValue.value === "") && visited.stateValue)
-      errors.stateValue = "Please enter your state";
-
-    if ((cityValue.value === undefined || cityValue.value === "") && visited.cityValue )
-      errors.cityValue = "Please enter your city";
-
-    setErrors(errors);
-
-    if (Object.entries(errors).length === 0) {
-      return true;
-    } else {
-      return false;
+  // API to get cities list
+  const getCitiesList = async (value) => {
+    const res = await getCities(value);
+    let temp = [];
+    for (let i = 0; i < res.data.length; i++) {
+      temp.push({
+        value: res.data[i].city_name,
+        label: res.data[i].city_name,
+      });
     }
+    setCities(temp);
   };
 
-  // Handle Visited Fields
-  const handleVisited = e => {
-    let { name } = e.target || e;
-    _.set(visited, name, true);
-    setVisited({ ...visited });
-    doValidate();
-  };
-
-  const handleChange = newValue => {
-    setSkills(newValue);
-  };
-
-  const submitResponse = async e => {
+  // Final Submission
+  const submitResponse = async (e) => {
     e.preventDefault();
     const temp = [];
     for (let i = 0; i < skillsList.length; i++) {
@@ -283,7 +299,7 @@ const SubmissionForm = () => {
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
-        draggable: true
+        draggable: true,
       });
     }
     setLoading(false);
@@ -326,7 +342,7 @@ const SubmissionForm = () => {
                       id="nameInput"
                       maxLength="132"
                       value={name}
-                      onChange={e => setName(e.target.value)}
+                      onChange={(e) => setName(e.target.value)}
                       onBlur={handleVisited}
                     />
                     <span className="form-text text-danger">
@@ -349,7 +365,7 @@ const SubmissionForm = () => {
                       id="nameInput"
                       maxLength="132"
                       value={jobRole}
-                      onChange={e => setJobRole(e.target.value)}
+                      onChange={(e) => setJobRole(e.target.value)}
                       onBlur={handleVisited}
                     />
                     <span className="form-text text-danger">
@@ -369,28 +385,28 @@ const SubmissionForm = () => {
                       name="industry"
                       placeholder="Select from options"
                       value={industry}
-                      options={array2}
-                      theme={theme => ({
+                      options={industeries}
+                      theme={(theme) => ({
                         ...theme,
                         colors: {
                           ...theme.colors,
                           primary25: "#FFF5E5",
-                          primary: "#EC7211"
-                        }
+                          primary: "#EC7211",
+                        },
                       })}
                       styles={customStyles}
                       components={{
-                        IndicatorSeparator: () => null
+                        IndicatorSeparator: () => null,
                       }}
                       classNamePrefix="react-select-padding"
                       className="react-select-padding"
-                      onChange={event => {
+                      onChange={(event) => {
                         setIndustry({
                           label: event.label,
-                          value: event.value
+                          value: event.value,
                         });
                       }}
-                      onBlur={e => {
+                      onBlur={(e) => {
                         visited.industry = true;
                         handleVisited(e);
                       }}
@@ -412,28 +428,28 @@ const SubmissionForm = () => {
                       placeholder="Select from options"
                       value={experience}
                       options={experienceList}
-                      theme={theme => ({
+                      theme={(theme) => ({
                         ...theme,
                         colors: {
                           ...theme.colors,
                           primary25: "#FFF5E5",
-                          primary: "#EC7211"
-                        }
+                          primary: "#EC7211",
+                        },
                       })}
                       styles={customStyles}
                       components={{
-                        IndicatorSeparator: () => null
+                        IndicatorSeparator: () => null,
                       }}
-                      onBlur={e => {
+                      onBlur={(e) => {
                         visited.experience = true;
                         handleVisited(e);
                       }}
                       classNamePrefix="react-select-padding"
                       className="react-select-padding"
-                      onChange={event => {
+                      onChange={(event) => {
                         setExperience({
                           label: event.label,
-                          value: event.value
+                          value: event.value,
                         });
                       }}
                     ></Select>
@@ -454,28 +470,28 @@ const SubmissionForm = () => {
                       placeholder="Select from options"
                       value={proficienyLevel}
                       options={proficienyLevelList}
-                      theme={theme => ({
+                      theme={(theme) => ({
                         ...theme,
                         colors: {
                           ...theme.colors,
                           primary25: "#FFF5E5",
-                          primary: "#EC7211"
-                        }
+                          primary: "#EC7211",
+                        },
                       })}
                       styles={customStyles}
                       components={{
-                        IndicatorSeparator: () => null
+                        IndicatorSeparator: () => null,
                       }}
                       classNamePrefix="react-select-padding"
                       className="react-select-padding"
-                      onBlur={e => {
+                      onBlur={(e) => {
                         visited.proficienyLevel = true;
                         handleVisited(e);
                       }}
-                      onChange={event => {
+                      onChange={(event) => {
                         setProficiencyLevel({
                           label: event.label,
-                          value: event.value
+                          value: event.value,
                         });
                       }}
                     ></Select>
@@ -497,7 +513,7 @@ const SubmissionForm = () => {
                       name="linkedinUrl"
                       type="text"
                       className="form-control"
-                      onChange={e => setLinkedinUrl(e.target.value)}
+                      onChange={(e) => setLinkedinUrl(e.target.value)}
                       value={linkedinUrl}
                       onBlur={handleVisited}
                     />
@@ -519,22 +535,22 @@ const SubmissionForm = () => {
                       isClearable
                       placeholder="Select from options"
                       options={skillsList.length >= 10 ? [] : skills}
-                      theme={theme => ({
+                      theme={(theme) => ({
                         ...theme,
                         colors: {
                           ...theme.colors,
                           primary25: "#FFF5E5",
-                          primary: "#EC7211"
-                        }
+                          primary: "#EC7211",
+                        },
                       })}
                       styles={customStyles}
                       components={{
-                        IndicatorSeparator: () => null
+                        IndicatorSeparator: () => null,
                       }}
                       classNamePrefix="react-select-padding"
                       className="react-select-padding"
                       onChange={handleChange}
-                      onBlur={e => {
+                      onBlur={(e) => {
                         visited.skillsList = true;
                         handleVisited(e);
                       }}
@@ -555,30 +571,30 @@ const SubmissionForm = () => {
                     <Select
                       placeholder="Select from options"
                       value={stateValue}
-                      theme={theme => ({
+                      theme={(theme) => ({
                         ...theme,
                         colors: {
                           ...theme.colors,
                           primary25: "#FFF5E5",
-                          primary: "#EC7211"
-                        }
+                          primary: "#EC7211",
+                        },
                       })}
                       styles={customStyles}
                       components={{
-                        IndicatorSeparator: () => null
+                        IndicatorSeparator: () => null,
                       }}
-                      onBlur={e => {
+                      onBlur={(e) => {
                         visited.stateValue = true;
                         handleVisited(e);
                       }}
                       options={states}
                       classNamePrefix="react-select-padding"
                       className="react-select-padding"
-                      onChange={event => {
+                      onChange={(event) => {
                         getCitiesList(event.value);
                         setStateValue({
                           label: event.label,
-                          value: event.value
+                          value: event.value,
                         });
                         setCityValue("");
                       }}
@@ -617,7 +633,7 @@ const SubmissionForm = () => {
                       name="btnradio"
                       id="1"
                       checked={profileExpiresIn === "1"}
-                      onChange={e => setProfileExpiresIn(e.target.id)}
+                      onChange={(e) => setProfileExpiresIn(e.target.id)}
                     />
                     <label
                       className="btn btn-outline-primary autoDeleteProfile"
@@ -632,7 +648,7 @@ const SubmissionForm = () => {
                       name="btnradio"
                       id="2"
                       checked={profileExpiresIn === "2"}
-                      onChange={e => setProfileExpiresIn(e.target.id)}
+                      onChange={(e) => setProfileExpiresIn(e.target.id)}
                     />
                     <label
                       className="btn btn-outline-primary autoDeleteProfile"
@@ -646,7 +662,7 @@ const SubmissionForm = () => {
                       className="btn-check"
                       name="btnradio"
                       id="3"
-                      onChange={e => setProfileExpiresIn(e.target.id)}
+                      onChange={(e) => setProfileExpiresIn(e.target.id)}
                       checked={profileExpiresIn === "3"}
                     />
                     <label
@@ -661,7 +677,7 @@ const SubmissionForm = () => {
                       className="btn-check"
                       name="btnradio"
                       id="4"
-                      onChange={e => setProfileExpiresIn(e.target.id)}
+                      onChange={(e) => setProfileExpiresIn(e.target.id)}
                       checked={profileExpiresIn === "4"}
                     />
                     <label
@@ -676,7 +692,7 @@ const SubmissionForm = () => {
                       className="btn-check"
                       name="btnradio"
                       id="5"
-                      onChange={e => setProfileExpiresIn(e.target.id)}
+                      onChange={(e) => setProfileExpiresIn(e.target.id)}
                       checked={profileExpiresIn === "5"}
                     />
                     <label
@@ -698,29 +714,29 @@ const SubmissionForm = () => {
                     <Select
                       placeholder="Select from options"
                       value={cityValue}
-                      theme={theme => ({
+                      theme={(theme) => ({
                         ...theme,
                         colors: {
                           ...theme.colors,
                           primary25: "#FFF5E5",
-                          primary: "#EC7211"
-                        }
+                          primary: "#EC7211",
+                        },
                       })}
                       styles={customStyles}
                       components={{
-                        IndicatorSeparator: () => null
+                        IndicatorSeparator: () => null,
                       }}
-                      onBlur={e => {
+                      onBlur={(e) => {
                         visited.cityValue = true;
                         handleVisited(e);
                       }}
                       options={cities}
                       classNamePrefix="react-select-padding"
                       className="react-select-padding"
-                      onChange={event => {
+                      onChange={(event) => {
                         setCityValue({
                           label: event.label,
-                          value: event.value
+                          value: event.value,
                         });
                       }}
                     />
@@ -738,7 +754,7 @@ const SubmissionForm = () => {
                         name="relocationPossibility"
                         id="setRelocationPossibilityStatus"
                         checked={relocationPossibility}
-                        onChange={e =>
+                        onChange={(e) =>
                           setRelocationPossibility(e.target.checked)
                         }
                       />
@@ -767,7 +783,7 @@ const SubmissionForm = () => {
                       name="acceptTnc"
                       id="setAcceptTncStatus"
                       checked={acceptTnc}
-                      onChange={e => setAcceptTnc(e.target.checked)}
+                      onChange={(e) => setAcceptTnc(e.target.checked)}
                     />
                     <label
                       className="form-check-label text-muted font-12"
@@ -788,7 +804,7 @@ const SubmissionForm = () => {
                 >
                   <button
                     className="btn btn-primary text-white w-75  border-20"
-                    onClick={e => submitResponse(e)}
+                    onClick={(e) => submitResponse(e)}
                     disabled={!acceptTnc || loading || !onVerify}
                   >
                     {" "}
