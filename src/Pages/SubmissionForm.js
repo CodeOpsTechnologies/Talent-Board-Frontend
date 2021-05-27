@@ -11,7 +11,7 @@ import {
   industeries,
   experienceList,
   proficienyLevelList,
-} from "./constants";
+} from "../Helpers/constants";
 import _ from "lodash";
 import SuccessModal from "./SuccessModal";
 import moment from "moment";

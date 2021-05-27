@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect, useRef } from "react";
 import { Formik, FieldArray } from "formik";
-import { experienceFilter } from "../../Pages/constants";
+import { experienceFilter } from "../../Helpers/constants";
 import Chevron from "./Chevron";
 import "./Accordin.css";
 

@@ -6,7 +6,7 @@ import icon from "../Images/icon.svg";
 import DataTable from "react-data-table-component";
 import Accordion from "../Components/Accordian/Accordian";
 import Loader from "../Components/Loader";
-import { experienceFilter } from "./constants";
+import { experienceFilter } from "../Helpers/constants";
 import { getPofiles, getFitlers } from "../CRUD/talentboard.crud";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
