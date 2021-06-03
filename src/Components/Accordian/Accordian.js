@@ -89,7 +89,6 @@ function Accordion({
                                 setFinalArray(finalArray);
                                 filterData(finalArray);
                               } else {
-                                console.log(finalArray);
                                 const filter =
                                   values.initalArray.indexOf(filters);
                                 arrayHelpers.remove(filter);
