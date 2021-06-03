@@ -1,4 +1,4 @@
-# AWS UI Talent Board
+# AWS UG Talent Board
 [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/CodeOpsTechnologies)
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/CodeOpsTechnologies)
 [![Continuous deploy](https://github.com/CodeOpsTechnologies/Talent-Board-Frontend/actions/workflows/main.yml/badge.svg)](https://github.com/CodeOpsTechnologies/Talent-Board-Frontend/actions/workflows/main.yml)
