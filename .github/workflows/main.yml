@@ -27,21 +27,16 @@ jobs:
 
       - name: Deploy dev
         if: github.ref == 'refs/heads/main'
-        run: serverless --verbose
         env: 
           AWS_ACCESS_KEY_ID: ${{secrets.DEV_AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.DEV_AWS_SECRET_ACCESS_KEY}}
           BUCKET_NAME: dev-talent-board
           REGION: ap-southeast-1
           REACT_APP_API_URL: https://dev-api.awsreskill.com
+        run: serverless --verbose
 
       - name: Deploy prod
         if: github.ref == 'refs/heads/prod'
-        run: |
-          pip install awscli
-          aws s3 cp ./build s3://$BUCKET_NAME/ --recursive --include "*"
-          aws cloudfront create-invalidation --distribution-id $CDN_DISTRIBUTION_ID --paths "/*"
-          echo "Deployed to AWS UG talent website"
         env: 
           AWS_ACCESS_KEY_ID: ${{secrets.PROD_AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.PROD_AWS_SECRET_ACCESS_KEY}}
@@ -49,3 +44,9 @@ jobs:
           BUCKET_NAME: talent-awsug
           CDN_DISTRIBUTION_ID: ${{secrets.CDN_DISTRIBUTION_ID}}
           REACT_APP_API_URL: https://api.awsreskill.com
+        run: |
+          echo $REACT_APP_API_URL
+          pip install awscli
+          aws s3 cp ./build s3://$BUCKET_NAME/ --recursive --include "*"
+          aws cloudfront create-invalidation --distribution-id $CDN_DISTRIBUTION_ID --paths "/*"
+          echo "Deployed to AWS UG talent website"
