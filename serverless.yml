@@ -6,6 +6,7 @@ awsug-talent:
   inputs:
     code:
       src: ./build
+    # The following two parameters have to be unique for an application. Replace it with your bucket and domain names.
     bucketName: dev-talent-board
     domain: dev-talent-board.awsreskill.com
     env:
