@@ -44,5 +44,6 @@ jobs:
         env: 
           AWS_ACCESS_KEY_ID: ${{secrets.PROD_AWS_ACCESS_KEY_ID}}
           AWS_SECRET_ACCESS_KEY: ${{secrets.PROD_AWS_SECRET_ACCESS_KEY}}
-          BUCKET_NAME: talent-awsug
           # This should change as per your bucket name
+          BUCKET_NAME: talent-awsug
+          CDN_DISTRIBUTION_ID: ${{secrets.CDN_DISTRIBUTION_ID}}
