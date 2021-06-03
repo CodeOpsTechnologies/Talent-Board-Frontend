@@ -33,6 +33,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{secrets.DEV_AWS_SECRET_ACCESS_KEY}}
           BUCKET_NAME: dev-talent-board
           REGION: ap-southeast-1
+          REACT_APP_API_URL: https://dev-api.awsreskill.com
 
       - name: Deploy prod
         if: github.ref == 'refs/heads/prod'
@@ -47,3 +48,4 @@ jobs:
           # This should change as per your bucket name
           BUCKET_NAME: talent-awsug
           CDN_DISTRIBUTION_ID: ${{secrets.CDN_DISTRIBUTION_ID}}
+          REACT_APP_API_URL: https://api.awsreskill.com
