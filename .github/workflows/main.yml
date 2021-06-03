@@ -3,7 +3,8 @@ name: Continuous deploy
 on:
   push:
     branches: 
-      - master
+      - main
+      - prod
 
 jobs:
   serverless-deploy:
@@ -29,8 +30,15 @@ jobs:
         run: npm run build
 
       - name: Deploy dev
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         run: serverless --verbose
         env: 
           BUCKET_NAME: dev-talent-board
+          REGION: ap-southeast-1
+
+      - name: Deploy prod
+        if: github.ref == 'refs/heads/prod'
+        run: serverless --verbose
+        env: 
+          BUCKET_NAME: prod-talent-board
           REGION: ap-southeast-1
