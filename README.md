@@ -1,7 +1,7 @@
 # AWS UI Talent Board
 [![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/CodeOpsTechnologies)
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/CodeOpsTechnologies)
-[![Deployment](https://github.com/CodeOpsTechnologies/Talent-Board-Backend/actions/workflows/main.yml/badge.svg)](https://github.com/CodeOpsTechnologies/Talent-Board-Frontend/actions/workflows/main.yml)
+[![Continuous deploy](https://github.com/CodeOpsTechnologies/Talent-Board-Frontend/actions/workflows/main.yml/badge.svg)](https://github.com/CodeOpsTechnologies/Talent-Board-Frontend/actions/workflows/main.yml)
 
 This is a community initiative to connect active job seekers with organizations and people who participate in employee referral programs.
 
