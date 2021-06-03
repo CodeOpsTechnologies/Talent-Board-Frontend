@@ -7,16 +7,16 @@ This is a community initiative to connect active job seekers with organizations 
 
 Currently we encourage only job seekers / candidates who lost their jobs in the pandemic scenario. Referrals should be verified via Linkedin profiles. (Click Linkedin Connect-> Save profile as PDF-> Refer). As a community, it will be a win-win situation for all of us if we can support and make the future safe for one another. Help them to resume their career by referring. #refer2resume
 
-## Prerequisite
-Your Machine must have nodejs installed in your system
+Anyone who is interested in having a talent board to help the community can feel freel to use this repo. This repo is only for the front-end part of the Talent Board. For the backend, check the [Other Useful Links].  
 
+## Prerequisite
+Your machine must have NodeJS installed in your system.
 
 ## Tech Stack
-<b>Frontned</b>: Reactjs
+<b>Frontend</b>: ReactJS
 <br>
 <b>Styling</b>: CSS and BootStrap v5.0
 <br>
-*The UX of Talent-Board was designed by Team [Antstack](https://www.antstack.io/)*
 
 ## Getting Started
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/CodeOpsTechnologies/Talent-Board-Frontend?logo=github)](https://talent.awsug.in/) [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/CodeOpsTechnologies/Talent-Board-Frontend?color=bluevoilet&logo=github)](https://github.com/CodeOpsTechnologies/Talent-Board-Frontend/commits/) [![GitHub repo size](https://img.shields.io/github/repo-size/CodeOpsTechnologies/Talent-Board-Frontend?logo=github)](https://talent.awsug.in/)
@@ -98,3 +98,8 @@ API Docs -> [http://reskill-documentaion.s3-website-ap-southeast-1.amazonaws.com
 [![Facebook](https://img.shields.io/static/v1.svg?label=connect&message=@CodeOpsTech&color=grey&logo=facebook&style=flat&logoColor=white&colorA=royalblue)](https://www.facebook.com/CodeOpsTech)
 [![LinkedIn](https://img.shields.io/static/v1.svg?label=connect&message=@CodeOpsTech&color=grey&logo=linkedin&style=flat&logoColor=white&colorA=royalblue)](https://www.linkedin.com/company/codeops-technologies/)
 [![Twitter](https://img.shields.io/static/v1.svg?label=connect&message=@CodeOpsTech&color=grey&logo=twitter&style=flat&logoColor=white&colorA=royalblue)](https://twitter.com/CodeOpsTech)
+
+## Contributors / Credits 
+
+* The UX of the Talent-Board was designed by the ever awesome Team [Antstack](https://www.antstack.io/)*
+
