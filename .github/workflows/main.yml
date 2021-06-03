@@ -10,10 +10,6 @@ jobs:
   serverless-deploy:
     runs-on: ubuntu-latest
 
-    env:
-      AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
-      AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-
     steps:
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
@@ -33,12 +29,20 @@ jobs:
         if: github.ref == 'refs/heads/main'
         run: serverless --verbose
         env: 
+          AWS_ACCESS_KEY_ID: ${{secrets.DEV_AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.DEV_AWS_SECRET_ACCESS_KEY}}
           BUCKET_NAME: dev-talent-board
           REGION: ap-southeast-1
 
       - name: Deploy prod
         if: github.ref == 'refs/heads/prod'
-        run: serverless --verbose
+        run: |
+          pip install awscli
+          aws s3 cp ./build s3://$BUCKET_NAME/ --recursive --include "*"
+          aws cloudfront create-invalidation --distribution-id $CDN_DISTRIBUTION_ID --paths "/*"
+          echo "Deployed to AWS UG talent website"
         env: 
+          AWS_ACCESS_KEY_ID: ${{secrets.PROD_AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.PROD_AWS_SECRET_ACCESS_KEY}}
           BUCKET_NAME: prod-talent-board
           REGION: ap-southeast-1
