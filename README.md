@@ -15,7 +15,7 @@ Your Machine must have nodejs installed in your system
 <br>
 <b>Styling</b>: CSS and BootStrap v5.0
 <br>
-The UX of Talent-Board was designed by Team [Antstack](https://www.antstack.io/)
+*The UX of Talent-Board was designed by Team [Antstack](https://www.antstack.io/)*
 
 ## Getting Started
 [![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/CodeOpsTechnologies/talent-board-fe?logo=github)](https://talent.awsug.in/) [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/CodeOpsTechnologies/talent-board-fe?color=bluevoilet&logo=github)](https://github.com/CodeOpsTechnologies/talent-board-fe/commits/) [![GitHub repo size](https://img.shields.io/github/repo-size/CodeOpsTechnologies/talent-board-fe?logo=github)](https://talent.awsug.in/)
