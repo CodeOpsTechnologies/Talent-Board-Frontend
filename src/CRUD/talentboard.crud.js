@@ -53,6 +53,6 @@ export function getPofiles(limit, offset, searchTerm="", sort = "+name", finalAr
 
 // API to get filters
 export function getFitlers(){
-  console.log("Env", process.env.REACT_APP_API_URL)
+  console.log("Env", process.env)
   return axios.get(API_URL + FILTER_DATA )
 }
