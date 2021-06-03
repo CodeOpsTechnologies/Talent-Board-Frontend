@@ -23,6 +23,8 @@ jobs:
         run: npm install
 
       - name: Build Project
+        env: 
+          REACT_APP_API_URL: "${{ github.ref == 'refs/heads/main' && 'https://dev-api.awsreskill.com' || 'https://api.awsreskill.com' }}"
         run: npm run build
 
       - name: Deploy dev
