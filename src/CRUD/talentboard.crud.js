@@ -2,9 +2,9 @@ import axios from "axios";
 import { api } from "./axios.config";
 
 const API_URL = api.apiUrl;
-const ADD_PROFILE = "/awsug/talent";
-const GET_DATA = "/awsug/talent/profiles";
-const FILTER_DATA = "/awsug/talent/filters"
+const ADD_PROFILE = "/talent";
+const GET_DATA = "/talent/profiles";
+const FILTER_DATA = "/talent/filters"
 
 // API to Create Profile
 export function createProfile(
@@ -55,3 +55,5 @@ export function getPofiles(limit, offset, searchTerm="", sort = "+name", finalAr
 export function getFitlers(){
   return axios.get(API_URL + FILTER_DATA )
 }
+
+

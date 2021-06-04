@@ -24,7 +24,7 @@ jobs:
 
       - name: Build Project
         env: 
-          REACT_APP_API_URL: "${{ github.ref == 'refs/heads/main' && 'https://dev-api.awsreskill.com' || 'https://api.awsreskill.com' }}"
+          REACT_APP_API_URL: "${{ github.ref == 'refs/heads/main' && 'https://vkd8e5af0i.execute-api.ap-southeast-1.amazonaws.com/dev' || 'https://nwmxjrs4cb.execute-api.ap-south-1.amazonaws.com/prod' }}"
         run: npm run build
 
       - name: Deploy dev
@@ -34,7 +34,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{secrets.DEV_AWS_SECRET_ACCESS_KEY}}
           BUCKET_NAME: dev-talent-board
           REGION: ap-southeast-1
-          REACT_APP_API_URL: https://dev-api.awsreskill.com
+          REACT_APP_API_URL: https://vkd8e5af0i.execute-api.ap-southeast-1.amazonaws.com/dev
         run: serverless --verbose
 
       - name: Deploy prod
@@ -45,7 +45,7 @@ jobs:
           # This should change as per your bucket name
           BUCKET_NAME: talent-awsug
           CDN_DISTRIBUTION_ID: ${{secrets.CDN_DISTRIBUTION_ID}}
-          REACT_APP_API_URL: https://api.awsreskill.com
+          REACT_APP_API_URL: https://nwmxjrs4cb.execute-api.ap-south-1.amazonaws.com/prod
         run: |
           echo $REACT_APP_API_URL
           pip install awscli
