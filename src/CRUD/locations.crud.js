@@ -13,3 +13,6 @@ export function getStates() {
 export function getCities(state) {
 	return rawAxios.get(API_URL + GET_LOCATIONS + `?state=${state}`);
 }
+
+
+
