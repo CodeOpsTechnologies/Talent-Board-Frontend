@@ -89,7 +89,7 @@ Deployed URL -> [https://talent.awsug.in/](https://talent.awsug.in/)
 <br>
 Backend Code -> [https://github.com/CodeOpsTechnologies/Talent-Board-Backend](https://github.com/CodeOpsTechnologies/Talent-Board-Backend)
 <br>
-API Docs -> [http://reskill-documentaion.s3-website-ap-southeast-1.amazonaws.com/#api-AWS_UG_Talent_Board](http://reskill-documentaion.s3-website-ap-southeast-1.amazonaws.com/#api-AWS_UG_Talent_Board)
+API Docs -> [http://talentboard-api-documentation.s3-website-ap-southeast-1.amazonaws.com/](http://talentboard-api-documentation.s3-website-ap-southeast-1.amazonaws.com/)
 
 ## Contributors / Credits 
 
