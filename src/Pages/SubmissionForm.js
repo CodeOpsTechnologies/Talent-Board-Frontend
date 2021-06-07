@@ -14,10 +14,10 @@ import {
 } from "../Helpers/constants";
 import _ from "lodash";
 import SuccessModal from "./SuccessModal";
-import moment from "moment";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 import { toast } from "react-toastify";
+import { add, formatISO } from 'date-fns';
 toast.configure();
 
 const SubmissionForm = () => {
@@ -244,33 +244,29 @@ const SubmissionForm = () => {
     switch (profileExpiresIn) {
       case 1:
         expiresAfter = String(
-          moment(new Date()).add("15", "days")._d.toISOString()
-        ).slice(0, 10);
-        break;
+          formatISO(add(new Date(), { days: 15 }), { representation: "date" })
+          )
+          break;
       case 2:
         expiresAfter = String(
-          moment(new Date()).add("30", "days")._d.toISOString()
-        ).slice(0, 10);
+           formatISO(add(new Date(), { days: 30 }), { representation: "date" }))
         break;
       case 3:
         expiresAfter = String(
-          moment(new Date()).add("45", "days")._d.toISOString()
-        ).slice(0, 10);
+           formatISO(add(new Date(), { days: 45 }), { representation: "date" })
+        )
         break;
       case 4:
         expiresAfter = String(
-          moment(new Date()).add("60", "days")._d.toISOString()
-        ).slice(0, 10);
+           formatISO(add(new Date(), { days: 60 }), { representation: "date" }))
         break;
       case 5:
         expiresAfter = String(
-          moment(new Date()).add("90", "days")._d.toISOString()
-        ).slice(0, 10);
+           formatISO(add(new Date(), { days: 90 }), { representation: "date" }))
         break;
       default:
         expiresAfter = String(
-          moment(new Date()).add("30", "days")._d.toISOString()
-        ).slice(0, 10);
+           formatISO(add(new Date(), { days: 30 }), { representation: "date" }))
     }
 
     if (!finalValidate()) return;
